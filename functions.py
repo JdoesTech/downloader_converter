@@ -1,6 +1,8 @@
 import yt_dlp
 import os
 
+output_path = "./downloads"
+
 def download_mp4(url, output_path):
     ydl_options ={
         "format": "bestvideo+bestaudio/best",
