@@ -1,3 +1,6 @@
 yt_dlp
 fastapi
 uvicorn
+librosa
+numpy
+soundfile
