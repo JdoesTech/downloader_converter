@@ -3,6 +3,7 @@ import os
 import librosa
 import numpy as np
 import soundfile as sf
+import noisereduce as nr
 
 output_path = "./downloads"
 
@@ -50,5 +51,36 @@ def basic_noise_addition(filename, output_file):
     noise =np.random.normal(0, 0.009, y.shape)
     y_noisy = y + noise
     sf.write(output_file, y_noisy, sr)
-        
-
+    
+def noise_reduction_stationary(input_file, output_file):
+    audio_data, sample_rate = librosa.load(input_file, sr=None)
+    reduced_noise = nr.reduce_noise(
+        y=audio_data,
+        sr=sample_rate,
+        prop_decrease=0.8,
+        stationary=True
+    )
+    
+    sf.write(output_file, reduced_noise, sample_rate)
+    
+def noise_reduction_non_stat(input_file, output_file):
+    audio_data, sample_rate = librosa.load(input_file, sr=None, mono=True)
+    n =len(audio_data)
+    freqs= np.fft.rfftfreq(n, 1/sr)
+    mags= np.abs(np.fft.rfft(audio_data))
+    peak_idx= np.argmax(mags[1:])+1
+    dominant_freq= freqs[peak_idx]
+    noise_db = 20* np.log10(mags[peak_idx] / np.sqrt(n)+ 1e-10)
+    
+    print(f"Dominant Frequency: {dominant_freq:.1f} Hz at {noise_db:.1f} dB (global noise estimate)")
+    
+    cleaned= nr.reduce_noise(
+        y=audio_data,
+        sr=sample_rate,
+        prop_decrease=0.8,
+        stationary=False,
+        n_std_thresh=1.5
+    )
+    
+    sf.write(output_file, cleaned, sr)
+    print(f"Cleaning is complete. File has been saved as {output_file}")
