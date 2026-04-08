@@ -4,3 +4,5 @@ uvicorn
 librosa
 numpy
 soundfile
+noisereduce
+pypandoc

@@ -1,9 +1,12 @@
 import yt_dlp
 import os
+from pathlib import Path
+import zipfile
 import librosa
 import numpy as np
 import soundfile as sf
 import noisereduce as nr
+import pypandoc
 
 output_path = "./downloads"
 
@@ -66,7 +69,7 @@ def noise_reduction_stationary(input_file, output_file):
 def noise_reduction_non_stat(input_file, output_file):
     audio_data, sample_rate = librosa.load(input_file, sr=None, mono=True)
     n =len(audio_data)
-    freqs= np.fft.rfftfreq(n, 1/sr)
+    freqs= np.fft.rfftfreq(n, 1/sample_rate)
     mags= np.abs(np.fft.rfft(audio_data))
     peak_idx= np.argmax(mags[1:])+1
     dominant_freq= freqs[peak_idx]
@@ -82,5 +85,64 @@ def noise_reduction_non_stat(input_file, output_file):
         n_std_thresh=1.5
     )
     
-    sf.write(output_file, cleaned, sr)
+    sf.write(output_file, cleaned, sample_rate)
     print(f"Cleaning is complete. File has been saved as {output_file}")
+    
+supported_formats= {
+    "input": ["docx", "pdf", "md", "markdown", "txt", "html", "odt", "rst", "latex", "epub"],
+    "output": ["docx", "pdf", "md", "markdown", "txt", "html", "odt", "rst", "latex", "epub"],
+}
+
+def convert_document(input_path, input_format, output_format,output_path):
+    try:
+        if input_format not in supported_formats["input"]:
+            return {"status": "error", "message": f"Unsupported input format: {input_format}"}
+        if output_format not in supported_formats["output"]:
+            return {"status": "error", "message": f"Unsupported output format: {output_format}"}
+        
+        input_path = Path(input_path)
+        if not input_path.exists():
+            return {"status": "error", "message": f"File not found: {input_path}"}
+        
+        file_extension = input_path.suffix.lower().lstrip(".")
+        selected_input= input_format.lower()
+        
+        if file_extension != selected_input:
+            return{
+                "status": "error",
+                "message": f"File extension {file_extension} does not match selected input format {selected_input}"
+                            f"Please ensure the file extension matches the selected input format."
+            }
+            
+        if selected_input == "docx" and file_extension=="docx":
+            try:
+                with zipfile.ZipFile(input_path, "r") as d:
+                    if "word/document.xml" not in d.namelist():
+                        return {"status": "error", "message": "Invalid DOCX file: missing document.xml"}
+            except Exception:
+                pass
+            
+        if output_path is None:
+            output_path = input_path.with_suffix(f".{output_format.lower()}")
+        else:
+            output_path = Path(output_path)
+            
+        pypandoc.convert_file(
+            str(input_path),
+            output_path.lower(),
+            outputfile=str(output_path),
+            format=input_format.lower()
+        )
+        
+        return {
+            "status": "success",
+            "message": f"File converted successfully: {output_path}",
+            "output_path": str(output_path)
+        }
+        
+    except Exception as e:
+        return{
+            "status": "error",
+            "message": f"An error occurred during conversion: {str(e)}"
+        }
+            
