@@ -7,6 +7,7 @@ import numpy as np
 import soundfile as sf
 import noisereduce as nr
 import pypandoc
+import gzip
 
 output_path = "./downloads"
 
@@ -146,3 +147,14 @@ def convert_document(input_path, input_format, output_format,output_path):
             "message": f"An error occurred during conversion: {str(e)}"
         }
             
+
+def compress_text_file(input_file, output_file):
+    try:
+        with open(input_file, "rb") as f_in:
+            with gzip.open(output_file, "wb") as f_out:
+                f_out.writelines(f_in)
+        print(f"File compressed successfully: {output_file}")
+        
+    except Exception as e:
+        print(f"An error occurred during compression: {str(e)}")
+        
