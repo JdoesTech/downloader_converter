@@ -6,6 +6,5 @@ numpy
 soundfile
 noisereduce
 pypandoc
-gzip
 fastapi
 uvicorn

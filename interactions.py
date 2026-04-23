@@ -1,4 +1,4 @@
-from functions import *
+from backend.functions import *
 
 while True:
     print("Welcome to my downloader")
