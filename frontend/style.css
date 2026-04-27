@@ -5,7 +5,8 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
+@media (min-width: 1025px){
+    body {
     background-color:bisque;
     color: #333;
     line-height: 1.6;
@@ -18,6 +19,10 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+header.shifted{
+    margin-left: 0;
 }
 
 header h1 {
@@ -37,9 +42,17 @@ header h1 {
 }
 
 nav {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transform: none;
     background-color:darkolivegreen;
-    padding: 1rem;
+    padding: 0.5rem;
     display: flex;
+    justify-content: center;
+}
+nav.collapsed{
+    transform: none;
 }
 
 nav ul{
@@ -71,6 +84,14 @@ main {
     align-items: center;
     padding: 2rem;
 }
+
+main.shifted{
+    margin-left: 0;
+}
+
+#toggle-nav{
+    display: none;
+    }
 
 .invite{
     color:black;
@@ -110,10 +131,21 @@ main {
 .button:hover a{
     color: white;
 }
+}
 
 
 /*Tablet View*/
-@media (max-width: 7768px) {
+@media (max-width: 1024px) {
+
+    header{
+        margin-left: 200px;
+        transition: margin-left 0.5s ease;
+    }
+
+    header.shifted{
+        margin-left: 0;
+    }
+
     nav{
         height: 100%;
         width: 200px;
@@ -124,11 +156,11 @@ main {
         background-color:darkolivegreen;
         overflow-x: hidden;
         padding-top: 0.3rem;
-        transition: width 0.5s;
+        transition: transform 0.5s ease;
     }
     
     nav.collapsed{
-        width:0;
+        transform: translate(-100%);
     }
 
     nav ul {
@@ -149,6 +181,7 @@ main {
         border-radius: 15px;
         font-weight: 500;
         cursor: pointer;
+        z-index: 1000;
     }
 
     main{
