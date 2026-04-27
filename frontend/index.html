@@ -9,7 +9,7 @@
         <header>
             <h1>GnM</h1>
             <button id="toggle-nav" onclick="toggleNavBar()"> ☰ </button>
-            <button id="theme-toggle">Switch Theme</button>
+            <button id="theme-toggle" onclick="toggleDarkMode()">Switch Theme</button>
         </header>
         <nav>
             <ul>
@@ -21,36 +21,48 @@
         </nav>
         <main>
             <section>
-                <div class="Invite">
+                <div class="invite">
                     <h2>Here to solve your needs for all matters files </h2>
                 </div>
             </section>
             <section id="action-buttons">
                 <h3>What do you want to do?</h3>
                 <div class="buttons">
-                    <h4>Download Audio</h4>
-                    <div class="button">
-                        <a href="/download">Download Audio</a>
+                    <div class="button-container">
+                        <h4>Download Audio</h4>
+                        <div class="button">
+                            <a href="/download">Download Audio</a>
+                        </div>
                     </div>
-                    <h4>Download Video</h4>
-                    <div class="button">
-                        <a href="/download_video">Download Video</a>
+                    <div class="button-container">
+                        <h4>Download Video</h4>
+                        <div class="button">
+                            <a href="/download_video">Download Video</a>
+                        </div>
                     </div>
-                    <h4>Convert Document</h4>
-                    <div class="button">
-                        <a href="/convert_doc">Convert Document</a>
+                    <div class="button-container">
+                        <h4>Convert Document</h4>
+                        <div class="button">
+                            <a href="/convert_doc">Convert Document</a>
+                        </div>
                     </div>
-                    <h4>Compress File</h4>
-                    <div class="button">
-                        <a href="/compress">Compress File</a>
+                    <div class="button-container">
+                        <h4>Compress File</h4>
+                        <div class="button">
+                            <a href="/compress">Compress File</a>
+                        </div>
                     </div>
-                    <h4>Add Noise</h4>
-                    <div class="button">
-                        <a href="/add_noise">Add Noise</a>
+                    <div class="button-container">
+                        <h4>Add Noise</h4>
+                        <div class="button">
+                            <a href="/add_noise">Add Noise</a>
+                        </div>
                     </div>
-                    <h4>Reduce Noise</h4>
-                    <div class="button">
-                        <a href="/noise">Reduce Noise</a>
+                    <div class="button-container">
+                        <h4>Reduce Noise</h4>
+                        <div class="button">
+                            <a href="/noise">Reduce Noise</a>
+                        </div>
                     </div>
                 </div>
             </section>

@@ -5,11 +5,23 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-@media (min-width: 1025px){
-    body {
+body {
     background-color:bisque;
     color: #333;
     line-height: 1.6;
+}
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #f4f4f4;
+}
+
+body.dark-mode header, nav {
+    background-color: #333;
+    color: #f4f4f4;
+}
+
+body.dark-mode .invite * {
+    color: #f4f4f4;
 }
 
 header{
@@ -20,14 +32,12 @@ header{
     justify-content: center;
     align-items: center;
     position: relative;
-}
-header.shifted{
-    margin-left: 0;
+    transition: margin-left 0.5s ease;
 }
 
 header h1 {
-    font-size: 2rem;
-}
+        font-size: 2rem;
+    }
 
 #theme-toggle{
     position: absolute;
@@ -41,28 +51,14 @@ header h1 {
     cursor: pointer;
 }
 
-nav {
-    position: relative;
-    width: 100%;
-    height: auto;
-    transform: none;
+.invite{
+    color: #333;
+}
+
+nav{
     background-color:darkolivegreen;
-    padding: 0.5rem;
     display: flex;
     justify-content: center;
-}
-nav.collapsed{
-    transform: none;
-}
-
-nav ul{
-    display: flex;
-    justify-content: center;
-    list-style: none;
-}
-
-nav ul li{
-    margin: 0 1.5rem;
 }
 
 nav ul li a{
@@ -77,33 +73,9 @@ nav ul li a:hover{
     color: darkred;
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-}
-
-main.shifted{
-    margin-left: 0;
-}
-
-#toggle-nav{
-    display: none;
-    }
-
 .invite{
-    color:black;
-    padding: 1rem;
-}
-
-#action-buttons{
-    margin: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    color: inherit;
+    }
 
 .button{
     margin: 0.4rem;
@@ -131,29 +103,103 @@ main.shifted{
 .button:hover a{
     color: white;
 }
+
+
+@media (min-width: 1025px){
+
+header{
+    background-color: blanchedalmond;
+    color: #333;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+header.shifted{
+    margin-left: 0;
+}
+
+header h1 {
+    padding-right: 2.5rem;
+}
+
+nav {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transform: none;
+    padding: 0.5rem;
+}
+nav.collapsed{
+    transform: none;
+}
+
+nav ul{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+nav ul li{
+    margin: 0 1.5rem;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+main.shifted{
+    margin-left: 0;
+}
+
+#toggle-nav{
+    display: none;
+    }
+
+.invite{
+    color:black;
+    padding: 1rem;
+}
+
+#action-buttons{
+    margin: 0.5rem;
+    }
+
+.buttons{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 1.5rem;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 }
 
 
 /*Tablet View*/
 @media (max-width: 1024px) {
-
     header{
         margin-left: 200px;
-        transition: margin-left 0.5s ease;
     }
 
     header.shifted{
         margin-left: 0;
     }
 
+
     nav{
+        position: fixed;
         height: 100%;
         width: 200px;
-        position: fixed;
         z-index: 1;
         top: 0;
         left: 0;
-        background-color:darkolivegreen;
         overflow-x: hidden;
         padding-top: 0.3rem;
         transition: transform 0.5s ease;
@@ -164,6 +210,9 @@ main.shifted{
     }
 
     nav ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
         flex-direction: column;
         align-items: center;
     }
@@ -181,7 +230,6 @@ main.shifted{
         border-radius: 15px;
         font-weight: 500;
         cursor: pointer;
-        z-index: 1000;
     }
 
     main{
@@ -199,7 +247,6 @@ main.shifted{
     }
 
     .invite{
-        color:black;
         padding: 0.6rem;
     }
     #action-buttons{
@@ -208,35 +255,23 @@ main.shifted{
         flex-direction: column;
         align-items: center;
     }
-    .button{
-        margin: 0.4rem;
-        padding: 0.5rem;
-        border: 1px solid #333;
-        background-color: darkolivegreen;
-        border-radius: 10px;
-    }
-    .button a{
-        color: #333;
-        font-weight: 500;
-        text-decoration: none;
-        font-weight:300;
-        transition: all 0.5s ease;
-    }
-
-    .button:hover {
-        background-color: darkred;
-        border-color: darkred;
-        cursor: pointer;
-        font-weight: 300;
-    }
-
-    .button:hover a{
-        color: white;
-    }
+    
 }
 
 /*Mobile View*/
 @media (max-width: 480px) {
+    header{
+        margin-left: 100px;
+    }
+
+    header.shifted{
+        margin-left: 0;
+    }
+
+    header h1 {
+        padding-right: 2.5rem;
+    }
+
     main{
         padding: 0.5rem;
         display: flex;
@@ -263,23 +298,25 @@ main.shifted{
     }
 
     nav{
+        position: fixed;
         height: 100%;
         width: 100px;
-        position: fixed;
         z-index: 1;
         top: 0;
         left: 0;
-        background-color:darkolivegreen;
         overflow-x: hidden;
         padding-top: 0.3rem;
         transition: width 0.5s;
     }
 
     nav.collapsed{
-        width: 0%;
+        transform: translate(-100%);
     }
 
     nav ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
         flex-direction: column;
         align-items: center;
     }
@@ -287,8 +324,8 @@ main.shifted{
     nav ul li{
         margin: 0.7rem 0;
     }
+
     .invite{
-        color:black;
         padding: 0.5rem;
     }
     #action-buttons{
@@ -296,31 +333,6 @@ main.shifted{
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-    .button{
-        margin: 0.4rem;
-        padding: 0.5rem;
-        border: 1px solid #333;
-        background-color: darkolivegreen;
-        border-radius: 10px;
-    }
-    .button a{
-        color: #333;
-        font-weight: 500;
-        text-decoration: none;
-        font-weight:300;
-        transition: all 0.5s ease;
-    }
-
-    .button:hover {
-        background-color: darkred;
-        border-color: darkred;
-        cursor: pointer;
-        font-weight: 300;
-    }
-
-    .button:hover a{
-        color: white;
     }
 }
 
