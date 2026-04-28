@@ -1,5 +1,5 @@
 <html>  
-     <head>
+    <head>
         <meta charset ="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Get and Mutate</title>
@@ -22,10 +22,28 @@
         <main>  
             <section>
                 <div class="invite">
-                    <h2>Here to solve your needs for all matters files </h2>
+                    <h2>Lets's help you with your Audio Files </h2>
                 </div>
             </section>
-
+            <section id="action-buttons">
+                <h3> What do you want to do? </h3>
+                <div class ="buttons">
+                    <div class="form-container">
+                        <h4>Download Audio</h4>
+                        <form>
+                            <label for="audio-url"> Enter your audio link here </label><br>
+                            <input type="text" id="audio_url" name="audio-url" placeholder="https://example.com/audiofile.mp3"><br>
+                            <button type="submit">Download</button>
+                        </form>
+                    </div>
+                    <div class="button-container">
+                        <h4> Convert Audio Type </h4>
+                        <h4> Select your File </h4>
+                        <div class="button">
+                            <a href="/convert_audio">Convert Audio</a>
+                    </div>
+                </div>
+            </section>
         </main>
         <script src="script.js"></script>
     </body>
