@@ -11,7 +11,7 @@ body {
     line-height: 1.6;
 }
 body.dark-mode {
-    background-color: #1a1a1a;
+    background-color: #333;
     color: #f4f4f4;
 }
 
@@ -127,6 +127,7 @@ input{
     border-radius: 15px;
     box-sizing: border-box;
 }
+
 button{
     padding: 0.2rem 0.8rem;
     margin-top: 0.2rem;
@@ -136,7 +137,14 @@ button{
     border-radius: 15px;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.5s ease;
+}
+
+button:hover {
+    background-color: darkred;
+    border-color: darkred;
+    cursor: pointer;
+    font-weight: 300;
+    color: white;
 }
 
 
@@ -204,6 +212,17 @@ main.shifted{
 #action-buttons{
     margin: 0.5rem;
     }
+
+.button:active {
+    background-color: darkred;
+    border-color: darkred;
+    cursor: pointer;
+    font-weight: 300;
+}
+
+.button:hover a{
+    color: white;
+}
 
 .buttons{
     display: grid;
@@ -389,5 +408,17 @@ main.shifted{
         flex-direction: column;
         align-items: center;
     }
+
+    .button:active {
+        background-color: darkred;
+        border-color: darkred;
+        cursor: pointer;
+        font-weight: 300;
+    }
+
+    .button:hover a{
+        color: white;
+    }
+
 }
 
