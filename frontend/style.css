@@ -41,20 +41,27 @@ header{
     color: #333;
     padding: 1rem;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     position: relative;
     transition: margin-left 0.5s ease;
+    overflow: hidden;
 }
 
 header h1 {
-        font-size: 2rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    flex: none;
     }
 
+.right-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: auto;
+}
+
 #theme-toggle{
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
     padding: 0.5rem;
     border: 1px solid #333;
     background-color: darkolivegreen;
@@ -62,6 +69,52 @@ header h1 {
     font-weight: 500;
     cursor: pointer;
 }
+
+#auth-buttons{
+    display: flex;
+}
+
+#signin-button, .login-button{
+    padding: 0.5rem, 0.8rem;
+    border: 1px solid #333;
+    background-color: darkolivegreen;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#signin-button{
+    border-right: none;
+    border-radius: 15px 0 0 15px;
+}
+
+#login-button{
+    border-radius: 0 15px 15px 0;
+}
+
+#signin-button:hover, .login-button:hover{
+    background-color: darkred;
+    border-color: darkred;
+    cursor: pointer;
+    font-weight: 300;
+    color: white;
+}
+
+#signin-button:active, .login-button:active{
+    background-color: darkred;
+    border-color: darkred;
+    cursor: pointer;
+    font-weight: 300;
+    color: white;
+}
+
+#signin-button a, .login-button a{
+    color: #333;
+    font-weight: 500;
+    text-decoration: none;
+    font-weight:300;
+    transition: all 0.5s ease;
+}
+
 
 .invite{
     color: #333;
@@ -163,10 +216,6 @@ header.shifted{
     margin-left: 0;
 }
 
-header h1 {
-    padding-right: 2.5rem;
-}
-
 nav {
     position: relative;
     width: 100%;
@@ -202,6 +251,12 @@ main.shifted{
 
 #toggle-nav{
     display: none;
+    }
+
+.right-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: auto;
     }
 
 .invite{
@@ -256,7 +311,6 @@ main.shifted{
         margin-left: 0;
     }
 
-
     nav{
         position: fixed;
         height: 100%;
@@ -283,6 +337,15 @@ main.shifted{
 
     nav ul li{
         margin: 1rem 0;
+    }
+
+    .right-controls {
+        flex-direction: column;
+        align-items: flex-end; 
+    }
+
+    .auth-buttons{
+        display: flex;
     }
 
     #toggle-nav{
@@ -313,12 +376,6 @@ main.shifted{
     .invite{
         padding: 0.6rem;
     }
-    #action-buttons{
-        margin: 0.5rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
 
     .button-container{
         margin-top: 2rem;
@@ -343,7 +400,11 @@ main.shifted{
     }
 
     header h1 {
-        padding-right: 2.5rem;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        flex: none;
+        z-index: 1;
     }
 
     main{
@@ -369,6 +430,11 @@ main.shifted{
         border-radius: 15px;
         font-weight: 500;
         cursor: pointer;
+    }
+
+    .right-controls {
+        flex-direction: column;
+        align-items: flex-end; 
     }
 
     nav{
