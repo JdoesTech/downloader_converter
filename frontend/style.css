@@ -254,8 +254,6 @@ button:hover {
     background-color: transparent;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     
-    width: min(90%, 350px);
-    max-width: 350px;
     text-align: center;
 }
 
@@ -312,7 +310,7 @@ button:hover {
     width: 40%
 }
 
-.remember-me{
+.remember-me, .agree-tnc{
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -321,15 +319,16 @@ button:hover {
     margin-bottom: 0.2rem;
 }
 
-.remember-me label{
+.remember-me label, .agree-tnc label{
     position: static;
     display: flex;
     align-items: center;
     gap: 0.3rem;
     transform: none;
+    white-space: nowrap;
 }
 
-.remember-me input[type="checkbox"]{
+.remember-me input[type="checkbox"], .agree-tnc input[type="checkbox"]{
     width: auto;
 }
 
@@ -356,7 +355,8 @@ button:hover {
     color: #f4f4f4;
 }
 
-.dark-mode .remember-me label{
+.dark-mode .remember-me label,
+.dark-mode .agree-tnc label{
     color: #f4f4f4;
 }
 
@@ -457,6 +457,11 @@ button:hover {
         margin-right: 2rem;
     }
 
+    .login-container, .signup-container{
+        width: min(90%, 350px);
+        max-width: 350px;
+    }
+
 }
 
 /*Tablet View*/
@@ -545,7 +550,16 @@ button:hover {
         margin-bottom: 2rem;;
     }
 
-    
+    .auth-page-container{
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .login-container, .signup-container{
+        width: min(90%, 350px);
+        max-width: 350px;
+    }
+
 }
 
 /*Mobile View*/
@@ -647,6 +661,12 @@ button:hover {
 
     .auth-page-container{
         width: 100vw;
+        height: 100vh;
+    }
+
+    .login-container, .signup-container{
+        width: 100%;
+        height: 100%;
     }
 
 }
