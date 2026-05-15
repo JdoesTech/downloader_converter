@@ -7,26 +7,34 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <main>
             <div class="auth-page-container">
                 <div class="login-container">
                 <h2>Login to Get and Mutate</h2>
                     <form class="GnM-form">
-                        <div class="form-group">
-                            <label>Email</label>
+                        <div class="form-group">                            
                             <input type="email" id="email" name="email" required>
+                            <label>Email</label>
+                            <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
                         </div>
                         <div class="form-group">
-                            <label>Password</label>
                             <input type="password" id="password" name="password" required>
+                            <label>Password</label>
+                            <span class="icon"><ion-icon name="eye-off-outline"></ion-icon></span>
                         </div>
+                        <div class="remember-me">
+                            <label><input type="checkbox" id="remember" name="remember"> Remember me</label>                            
+                            <a href="#">Forgot password?</a>
+                        </div>                    
                         <button onclick="login()">Login</button>
                         <p class="message" id="login-message"></p>
+                        <div class="signup-link">
+                            <p>Don't have an account? <a href="signup.html">Sign up</a></p>
                     </form>
                 </div>
             </div>
         <script src="script.js"></script>
-        </main>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     </body>
 </html>
 

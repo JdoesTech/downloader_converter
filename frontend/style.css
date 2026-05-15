@@ -5,8 +5,16 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 html, body {
-    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
 }
 
 body {
@@ -32,12 +40,12 @@ body.dark-mode nav ul li a {
     color: f4f4f4;
 }
 
-body.dark-mode .button a{
+body.dark-mode button{
     color: #f4f4f4;
 }
 
-body.dark-mode button{
-    color: #f4f4f4;
+body.dark-mode #auth-buttons a{
+    color: #f4f4f4 ;
 }
 
 header{
@@ -112,7 +120,7 @@ header h1 {
 }
 
 #signup-button a, #login-button a{
-    color: #333;
+    color: #f4f4f4;
     font-weight: 500;
     text-decoration: none;
     font-weight:300;
@@ -160,7 +168,7 @@ nav ul li a:active{
 }
 
 .button a{
-    color: #333;
+    color: #f4f4f4;
     font-weight: 500;
     text-decoration: none;
     font-weight:300;
@@ -195,10 +203,26 @@ button{
     margin-top: 0.2rem;
     border: 1px solid #333;
     background-color: darkolivegreen;
-    color: #333;
+    color: #f4f4f4;
     border-radius: 15px;
     font-weight: 500;
     cursor: pointer;
+}
+
+button a{
+    color: #f4f4f4;
+    font-weight: 500;
+    text-decoration: none;
+    font-weight:300;
+    transition: all 0.5s ease;
+}
+
+button:active {
+    background-color: darkred;
+    border-color: darkred;
+    cursor: pointer;
+    font-weight: 300;
+    color: white;
 }
 
 button:hover {
@@ -210,6 +234,7 @@ button:hover {
 }
 
 .auth-page-container{
+    width: 100%;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -221,12 +246,16 @@ button:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     padding: 2rem;
     border: 1px solid #333;
     border-radius: 30px;
+    
     background-color: transparent;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    
+    width: min(90%, 350px);
+    max-width: 350px;
     text-align: center;
 }
 
@@ -234,21 +263,74 @@ button:hover {
     margin-bottom: 1rem;
 }
 
-.login-container form, .signup-container form{
+.login-container .GnM-form, .signup-container .GnM-form{
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
+.form-group{
+    position: relative;
+    padding: 0.3rem 0;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
 .login-container input, .signup-container input{
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.5rem 0.7rem 0.5rem 0.3rem;
     border-radius: 10px;
     outline: none;
 }
+
+.login-container label, .signup-container label{
+    position: absolute;
+    left: 0.5rem;
+    top: 1rem;
+    background-color: transparent;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.login-container input:focus~label,
+.login-container input:valid~label,
+.signup-container input:focus~label,
+.signup-container input:valid~label{
+    top: -10px;
+}
+
+.login-container .icon, .signup-container .icon{
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 .login-container button, .signup-container button{
     margin: 0.5rem auto;
     width: 40%
+}
+
+.remember-me{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -0.8rem;
+    margin-bottom: 0.2rem;
+}
+
+.remember-me label{
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transform: none;
+}
+
+.remember-me input[type="checkbox"]{
+    width: auto;
 }
 
 .message{
@@ -256,6 +338,27 @@ button:hover {
     color: red;
 }
 
+.signup-link{
+    margin: 0.2rem;
+}
+
+.dark-mode .login-container label,
+.dark-mode .login-container .icon,
+.dark-mode .signup-container label,
+.dark-mode .signup-container .icon{
+    color: #020000;
+}
+
+.dark-mode .login-container input:focus~label,
+.dark-mode .login-container input:valid~label,
+.dark-mode .signup-container input:focus~label,
+.dark-mode .signup-container input:valid~label{
+    color: #f4f4f4;
+}
+
+.dark-mode .remember-me label{
+    color: #f4f4f4;
+}
 
 @media (min-width: 1025px){
 
@@ -441,6 +544,7 @@ button:hover {
         margin-top: 2rem;
         margin-bottom: 2rem;;
     }
+
     
 }
 
@@ -539,6 +643,10 @@ button:hover {
 
     .button:hover a{
         color: white;
+    }
+
+    .auth-page-container{
+        width: 100vw;
     }
 
 }
