@@ -241,7 +241,7 @@ button:hover {
     align-items: center;
 }
 
-.login-container, .signup-container{
+.login-container, .signup-container, .reset-password-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -257,11 +257,12 @@ button:hover {
     text-align: center;
 }
 
-.login-container h2, .signup-container h2{
+.login-container h2, .signup-container h2, .reset-password-container h2{
+    font-weight: 600;
     margin-bottom: 1rem;
 }
 
-.login-container .GnM-form, .signup-container .GnM-form{
+.login-container .GnM-form, .signup-container .GnM-form, .reset-password-container .GnM-form{
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -274,14 +275,14 @@ button:hover {
     width: 100%;
 }
 
-.login-container input, .signup-container input{
+.login-container input, .signup-container input, .reset-password-container input{
     width: 100%;
     padding: 0.5rem 0.7rem 0.5rem 0.3rem;
     border-radius: 10px;
     outline: none;
 }
 
-.login-container label, .signup-container label{
+.login-container label, .signup-container label, .reset-password-container label{
     position: absolute;
     left: 0.5rem;
     top: 1rem;
@@ -294,18 +295,20 @@ button:hover {
 .login-container input:focus~label,
 .login-container input:valid~label,
 .signup-container input:focus~label,
-.signup-container input:valid~label{
+.signup-container input:valid~label,
+.reset-password-container input:focus~label,
+.reset-password-container input:valid~label{
     top: -10px;
 }
 
-.login-container .icon, .signup-container .icon{
+.login-container .icon, .signup-container .icon, .reset-password-container .icon{
     position: absolute;
     right: 0.5rem;
     top: 50%;
     transform: translateY(-50%);
 }
 
-.login-container button, .signup-container button{
+.login-container button, .signup-container button, .reset-password-container button{
     margin: 0.5rem auto;
     width: 40%
 }
@@ -344,14 +347,18 @@ button:hover {
 .dark-mode .login-container label,
 .dark-mode .login-container .icon,
 .dark-mode .signup-container label,
-.dark-mode .signup-container .icon{
+.dark-mode .signup-container .icon,
+.dark-mode .reset-password-container label,
+.dark-mode .reset-password-container .icon{
     color: #020000;
 }
 
 .dark-mode .login-container input:focus~label,
 .dark-mode .login-container input:valid~label,
 .dark-mode .signup-container input:focus~label,
-.dark-mode .signup-container input:valid~label{
+.dark-mode .signup-container input:valid~label,
+.dark-mode .reset-password-container input:focus~label,
+.dark-mode .reset-password-container input:valid~label{
     color: #f4f4f4;
 }
 
@@ -457,7 +464,7 @@ button:hover {
         margin-right: 2rem;
     }
 
-    .login-container, .signup-container{
+    .login-container, .signup-container, .reset-password-container{
         width: min(90%, 350px);
         max-width: 350px;
     }
@@ -555,7 +562,7 @@ button:hover {
         height: 100vh;
     }
 
-    .login-container, .signup-container{
+    .login-container, .signup-container, .reset-password-container{
         width: min(90%, 350px);
         max-width: 350px;
     }
@@ -664,7 +671,7 @@ button:hover {
         height: 100vh;
     }
 
-    .login-container, .signup-container{
+    .login-container, .signup-container, .reset-password-container{
         width: 100%;
         height: 100%;
     }
