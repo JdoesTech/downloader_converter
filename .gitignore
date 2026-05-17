@@ -1,1 +1,7 @@
 venv
+.env
+migrations/versions
+__pycache__/
+*.py[cod]
+
+
