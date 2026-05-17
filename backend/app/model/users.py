@@ -3,7 +3,7 @@ from sqlalchemy import Column, String, table
 from sqlmodel import SQLModel, Field, Relationship
 
 from app.model.mixins import TimeMixin
-from app.model.mixins import UserRole
+from app.model.user_role import UserRole
 from app.model.person import Person
 from app.model.role import Role
 
