@@ -1,4 +1,4 @@
-from typing import list, Optional
+from typing import List, Optional
 from sqlalchemy import Column, String
 from sqlmodel import SQLModel, Field, Relationship
 from app.model.mixins import TimeMixin

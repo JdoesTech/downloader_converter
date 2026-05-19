@@ -1,9 +1,9 @@
 from datetime import date
 from typing import Optional
-from sqlalchemy import Enum, table
+from enum import Enum
+from sqlalchemy import  table
 from sqlmodel import SQLModel, Field, Relationship
 from app.model.mixins import TimeMixin
-from app.model.users import Users
 
 class Sex(str, Enum):
     MALE= "MALE"
