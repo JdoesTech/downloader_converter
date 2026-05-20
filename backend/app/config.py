@@ -13,6 +13,10 @@ DB_PORT = os.getenv("DB_PORT")
 DB_NAME = os.getenv("DB_NAME")
 
 DB_CONFIG = f"postgresql+asyncpg://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+SECRET_KEY=os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGO")
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
 
 class AsyncDatabaseSession:
     
