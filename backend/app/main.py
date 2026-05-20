@@ -2,6 +2,9 @@ import uvicorn
 from fastapi import FastAPI, APIRouter
 from app.config import db
 from contextlib import asynccontextmanager
+from mimetypes import init
+import re as A
+from app.services.auth_service import generate_role
 
 def init_app():
     db.init()
@@ -9,6 +12,7 @@ def init_app():
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         await db.create_all()
+        await generate_role()
         
         yield
         

@@ -10,11 +10,6 @@ class UsersRepository(BaseRepo):
     model =Users
     
     @staticmethod
-    async def find_by_username(username: str):
-        query = select(Users).where(Users.username == username)
-        return (await db.execute(query)).scalar_one_or_none()
-    
-    @staticmethod
     async def find_by_email(email: str):
         query= select(Users).where(Users.email == email)
         return (await db.execute(query)).scalar_one_or_none()
