@@ -37,7 +37,7 @@ class JWTRepo:
     def extract_token(self, token:str):
         return jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
     
-class JWTBearer(HTTPException):
+class JWTBearer(HTTPBearer):
     def __init__(self, auto_error: bool =True) -> None:
         super(JWTBearer, self).__init__(auto_error=auto_error)
         

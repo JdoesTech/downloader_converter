@@ -5,6 +5,7 @@ from contextlib import asynccontextmanager
 from mimetypes import init
 import re as A
 from app.services.auth_service import generate_role
+from app.controller import authentication, users
 
 def init_app():
     db.init()
@@ -24,10 +25,12 @@ def init_app():
         version="1",
         lifespan=lifespan
     )
+    app.include_router(authentication.router)
+    app.include_router(users.router)
         
     return app
 
-app= init_app
+app= init_app()
 
 
 def start():
