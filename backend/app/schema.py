@@ -1,64 +1,89 @@
 import logging
 import re
+from datetime import date, datetime
 from typing import Optional, TypeVar
-from fastapi import HTTPException
-from pydantic import BaseModel, field_validator
-from sqlalchemy import false
+
+from pydantic import BaseModel, EmailStr, field_validator
 
 from app.model.person import Sex
 
-
 T = TypeVar("T")
-
-#get root logger
 logger = logging.getLogger(__name__)
 
+
 class RegisterSchema(BaseModel):
-    
     fname: str
     lname: str
-    email: str
+    email: EmailStr
     password: str
     phone_number: str
     birth: str
     sex: Sex
-    profile: str = "base64"
-    
-    #phone number validation
-    @field_validator
-    def phone_validator(cls, v):
-        logger.debug(f"Phone in 2 validator: {v}")
-        
-        #regex phone number
+    profile: str = ""
+
+    @field_validator("phone_number")
+    @classmethod
+    def phone_validator(cls, value: str) -> str:
         regex = r"^[\+]?[(]?[0-9]{4}[)]?[-\s\.]?[0-9]{4}[-\s\.]?[0-9]{4,6}$"
-        if v and not re.search(regex, v, re.I):
-            raise HTTPException(status_code = 400, detail={"status": "Bad Request", "message": "Invalid Phone Number"})
-        return v
-    
-    #Sex Validation
-    @field_validator
-    def sex_validator(cls, v):
-        if hasattr(Sex, v) is False:
-            raise HTTPException(status_code = 400, detail={"status": "Bad Request", "message": "Invalid Gender"})
-        return v
-    
-    
+        if value and not re.search(regex, value, re.I):
+            raise ValueError("Invalid phone number")
+        return value
+
+    @field_validator("password")
+    @classmethod
+    def password_validator(cls, value: str) -> str:
+        if len(value) < 8:
+            raise ValueError("Password must be at least 8 characters")
+        return value
+
+    @field_validator("birth")
+    @classmethod
+    def birth_validator(cls, value: str) -> str:
+        for fmt in ("%Y-%m-%d", "%d-%m-%Y"):
+            try:
+                datetime.strptime(value, fmt)
+                return value
+            except ValueError:
+                continue
+        raise ValueError("Birth date must use YYYY-MM-DD or DD-MM-YYYY format")
+
+
 class LoginSchema(BaseModel):
-    email: str
+    email: EmailStr
     password: str
-    
+
+
 class ForgotPasswordSchema(BaseModel):
-    email: str
+    email: EmailStr
+
+
+class ResetPasswordSchema(BaseModel):
+    token: str
     new_password: str
-    
+
+    @field_validator("new_password")
+    @classmethod
+    def password_validator(cls, value: str) -> str:
+        if len(value) < 8:
+            raise ValueError("Password must be at least 8 characters")
+        return value
+
+
 class DetailSchema(BaseModel):
     status: str
     message: str
-    result: Optional[T] = None 
-    
+    result: Optional[T] = None
+
+
 class ResponseSchema(BaseModel):
     detail: str
-    result: Optional["T"] = None
-    
+    result: Optional[T] = None
 
-    
+
+def parse_birth(value: str) -> date:
+    for fmt in ("%Y-%m-%d", "%d-%m-%Y"):
+        try:
+            return datetime.strptime(value, fmt).date()
+        except ValueError:
+            continue
+    raise ValueError("Invalid birth date format")

@@ -1,24 +1,28 @@
-from sqlalchemy.future import select
 from typing import List
 
-from app.config import db, commit_rollback
-from app.repository.base_repo import BaseRepo
+from sqlalchemy.future import select
+
+from app.config import session_scope
 from app.model.role import Role
+from app.repository.base_repo import BaseRepo
+
 
 class RoleRepository(BaseRepo):
     model = Role
-    
+
     @staticmethod
     async def find_by_role_name(role_name: str):
-        query = select(Role).where(Role.role_name == role_name)
-        return (await db.execute(query)).scalar_one_or_none()
-    
+        async with session_scope() as session:
+            query = select(Role).where(Role.role_name == role_name)
+            return (await session.execute(query)).scalar_one_or_none()
+
     @staticmethod
-    async def find_by_role_name(role_name:List[str]):
-        query = select(Role).where(Role.role_name.in_(role_name))
-        return (await db.execute(query)).scalars().all()
-    
+    async def find_by_role_names(role_names: List[str]):
+        async with session_scope() as session:
+            query = select(Role).where(Role.role_name.in_(role_names))
+            return (await session.execute(query)).scalars().all()
+
     @staticmethod
-    async def create_list(role_name: List[Role]):
-        db.add_all(role_name)
-        await commit_rollback()
+    async def create_list(roles: List[Role]):
+        async with session_scope() as session:
+            session.add_all(roles)
