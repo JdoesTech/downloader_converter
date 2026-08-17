@@ -10,7 +10,7 @@
             <div class="auth-page-container">
                 <div class="signup-container">
                 <h2>Sign up for Get and Mutate</h2>
-                    <form class="GnM-form">
+                    <form class="GnM-form" onsubmit="signup(event)">
                         <div class="form-group">
                             <label>First Name</label>                            
                             <input type="text" id="fname" name="fname" required>
@@ -27,23 +27,41 @@
                             <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
                         </div>
                         <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" id="phone_number" name="phone_number" required>
+                            <span class="icon"><ion-icon name="call-outline"></ion-icon></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="date" id="birth" name="birth" required>
+                            <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select id="sex" name="sex" required>
+                                <option value="MALE">Male</option>
+                                <option value="FEMALE">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label>Password</label>
-                            <input type="password" id="password" name="password" required>
+                            <input type="password" id="password" name="password" minlength="8" required>
                             <span class="icon"><ion-icon name="eye-off-outline"></ion-icon></span>
                         </div>
                         <div class="agree-tnc">
                             <label><input type="checkbox" id="agree" name="agree" required> I agree to the Terms and Conditions</label>                            
                         </div>                    
-                        <button onclick="signup()">Sign Up</button>
+                        <button type="submit">Sign Up</button>
                         <p class="message" id="signup-message"></p>
                         <div class="signup-link">
                             <p>Do you have an account? <a href="login.html">Login</a></p>
+                        </div>
                     </form>
                 </div>
             </div>
+        <script src="auth.js"></script>
         <script src="script.js"></script>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     </body>
 </html>
-

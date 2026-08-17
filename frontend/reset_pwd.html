@@ -10,16 +10,45 @@
         <div class="auth-page-container">
             <div class="reset-pwd-container">
                 <h2>Reset Your Password</h2>
-                <h3>Enter your email address to receive password reset instructions.</h3>
-                    <form class="GnM-form">
-                        <div class="form-group">                            
-                            <input type="email" id="email" name="email" required>
-                            <label>Email</label>
-                            <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-                        </div>
-                    </form>
-                </div>
+                <h3 id="reset-step-title">Enter your email address to receive password reset instructions.</h3>
+                <form id="request-reset-form" class="GnM-form" onsubmit="requestPasswordReset(event)">
+                    <div class="form-group">                            
+                        <input type="email" id="email" name="email" required>
+                        <label>Email</label>
+                        <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                    </div>
+                    <button type="submit">Send Reset Instructions</button>
+                </form>
+
+                <form id="complete-reset-form" class="GnM-form hidden" onsubmit="resetPassword(event)">
+                    <div class="form-group">
+                        <input type="text" id="reset_token" name="reset_token" required>
+                        <label>Reset Token</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="new_password" name="new_password" minlength="8" required>
+                        <label>New Password</label>
+                    </div>
+                    <button type="submit">Update Password</button>
+                </form>
+
+                <p class="message" id="reset-message"></p>
             </div>
         </div>
+        <script src="auth.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const params = new URLSearchParams(window.location.search);
+                const isResetStep = params.get("step") === "reset";
+                document.getElementById("request-reset-form").classList.toggle("hidden", isResetStep);
+                document.getElementById("complete-reset-form").classList.toggle("hidden", !isResetStep);
+                document.getElementById("reset-step-title").textContent = isResetStep
+                    ? "Enter your reset token and choose a new password."
+                    : "Enter your email address to receive password reset instructions.";
+            });
+        </script>
+        <style>
+            .hidden { display: none; }
+        </style>
     </body>
 </html>

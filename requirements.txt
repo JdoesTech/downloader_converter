@@ -20,3 +20,8 @@ sqlmodel
 
 passlib[bcrypt]
 python-jose[cryptography]
+email-validator
+
+pytest
+httpx
+pytest-asyncio

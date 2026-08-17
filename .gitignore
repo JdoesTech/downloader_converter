@@ -3,6 +3,7 @@ venv
 migrations/versions
 __pycache__/
 *.py[cod]
+docs/
 
 
 
